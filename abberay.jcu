@@ -20,6 +20,28 @@
 	</open_files>
 	<symboltables>
 		<symboltable>
+			<path>..\..\Desktop\TextManipulation.java.sdk</path>
+			<symbols>
+				<symbol>ArrayList</symbol>
+				<symbol>Character</symbol>
+				<symbol>Integer</symbol>
+				<symbol>String</symbol>
+				<symbol>System</symbol>
+				<symbol>TextManipulation</symbol>
+			</symbols>
+		</symboltable>
+		<symboltable>
+			<path>..\..\Desktop\TextManipulation.java.sdk</path>
+			<symbols>
+				<symbol>ArrayList</symbol>
+				<symbol>Character</symbol>
+				<symbol>Integer</symbol>
+				<symbol>String</symbol>
+				<symbol>System</symbol>
+				<symbol>TextManipulation</symbol>
+			</symbols>
+		</symboltable>
+		<symboltable>
 			<path>TextManipulation.java.sdk</path>
 			<symbols>
 				<symbol>TextManipulation</symbol>
