@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace>
+	<settings>
+		<label>abberay</label>
+		<id>409</id>
+		<version>0</version>
+	</settings>
+	<users>
+		<user>
+			<path>abberay.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>abberay.jcp</path>
+		</project>
+	</projects>
+</workspace>
