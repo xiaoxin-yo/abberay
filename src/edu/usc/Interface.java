@@ -16,7 +16,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Interface {
-	private String paper = "Renal dendritic cells (DCs) and macrophages represent a constitutive, extensive and contiguous network of innate immune cells that provide sentinel and immune-intelligence activity; they induce and regulate inflammatory responses to freely filtered antigenic material and protect the kidney from infection. Tissue-resident or infiltrating DCs and macrophages are key factors in the initiation and propagation of renal disease, as well as essential contributors to subsequent tissue regeneration, regardless of the aetiological and pathogenetic mechanisms. The identification, and functional and phenotypic distinction of these cell types is complex and incompletely understood, and the same is true of their interplay and relationships with effector and regulatory cells of the adaptive immune system. In this Review, we discuss the common and distinct characteristics of DCs and macrophages, as well as key advances that have identified the renal-specific functions of these important phagocytic, antigen-presenting cells, and their roles in potentiating or mitigating intrinsic kidney disease. We also identify remaining issues that are of priority for further investigation, and highlight the prospects for translational and therapeutic application of the knowledge acquired.";
+	private String paper = "Sulfate (SO42-) is the second-most abundant anion after chloride in the modern ocean. It serves as an easily accessible energy source for sulfate-reducing prokaryotes (SRPs), which are commonly found in organic-rich sediments and play an important role in the decomposition of organic matter. Were these microbes major players in ecosystems during the Archean (before 2.5 billion years ago), when molecular oxygen was virtually absent from both the atmosphere and oceans? Whether this was the case depends on how much sulfate there was in the Archean ocean. Three articles in this issue (1-3) use precise measurements of stable sulfur isotope ratios to investigate how much sulfate there was in the Archean ocean and where that sulfate originated. Scientists use the ratio between two stable sulfur isotopes, 34S and 32S, to trace SRP activity in ancient sedimentary rocks. In sediments, the microbes preferentially reduce 32SO42- compared to 34SO42-, producing iron sulfide minerals that are depleted in 34S (a process called mass-dependent isotopic fractionation). 34S depletion recorded in pyrite (FeS2) minerals is thus a good indicator of SRP activity. Large 34S depletions are seen in the geological records starting about 2.3 billion years ago, but not before (4). One possible interpretation of these data is that there was little SRP activity in the Archean. Another possibility is that these microbes appeared much earlier, but that the Archean sulfate levels were too low for them to selectively reduce 32SO42-; low sulfate levels are known to reduce the degree of isotopic fractionation (5).";
+//	private String paper = "Renal dendritic cells (DCs) and macrophages represent a constitutive, extensive and contiguous network of innate immune cells that provide sentinel and immune-intelligence activity; they induce and regulate inflammatory responses to freely filtered antigenic material and protect the kidney from infection. Tissue-resident or infiltrating DCs and macrophages are key factors in the initiation and propagation of renal disease, as well as essential contributors to subsequent tissue regeneration, regardless of the aetiological and pathogenetic mechanisms. The identification, and functional and phenotypic distinction of these cell types is complex and incompletely understood, and the same is true of their interplay and relationships with effector and regulatory cells of the adaptive immune system. In this Review, we discuss the common and distinct characteristics of DCs and macrophages, as well as key advances that have identified the renal-specific functions of these important phagocytic, antigen-presenting cells, and their roles in potentiating or mitigating intrinsic kidney disease. We also identify remaining issues that are of priority for further investigation, and highlight the prospects for translational and therapeutic application of the knowledge acquired.";
 	private JTextArea textArea;
 	private MessageWindow window;
 	private final int windowWidth = 800;
@@ -106,14 +107,20 @@ public class Interface {
 			if(e.getClickCount() == 2){
 				System.out.println(textArea.getSelectedText());
 				window.setLocation(frame.getX()+e.getX()+70, frame.getY()+e.getY()+60);
-				tmp.setAbbr(textArea.getSelectedText());
-				tmp.findLoc(3);
-				tmp.returnResult();
-				for (int i=0;i<3;i++) {
-					String s = (i+1) + ". " + tmp.sentences[i];
+				tmp.setAbbv(textArea.getSelectedText());
+				tmp.prepare(tmp);
+				int minDisplay = 100;
+				if (tmp.countOccur()<3) {
+					minDisplay = tmp.countOccur();
+				}
+				else {
+					minDisplay = 3;
+				}
+				for (int i=0;i<minDisplay;i++) {
+					String s = (i+1) + ". " + tmp.results[i];
 					String html1 = "<html><body style='width: ";
 					String html2 = "px'>\n";
-					System.out.println(s);
+//					System.out.println(s);
 					sentenceLabels[i].setText(html1+"200"+html2+s);
 				}
 				window.pack();
