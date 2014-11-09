@@ -116,6 +116,14 @@ public class TextManipulation {
 			System.out.println(s + "\n");
 	}
 	
+	public String findLongForm() {
+		ArrayList longForm = new ArrayList<Integer>;
+		for (int i=0; i < 3; i++) {
+			longForm.add(text.substring(findSentenceStart(indexes[i]) + 1, indexes[i])));
+		}
+		return longForm;
+	}
+	
 /*	public String returnDef(){
 		private int [] qualities = int[indexes.length];
 		for (int i: indexes)
