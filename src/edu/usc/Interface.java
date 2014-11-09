@@ -116,12 +116,9 @@ public class Interface {
 				window.setLocation(frame.getX()+e.getX()+70, frame.getY()+e.getY()+60);
 				tmp.setAbbv(textArea.getSelectedText());
 				tmp.prepare(tmp);
-				int minDisplay = 100;
-				if (tmp.countOccur()<3) {
-					minDisplay = tmp.countOccur();
-				}
-				else {
-					minDisplay = 3;
+				int minDisplay = 3;
+				if (tmp.results.size()<3) {
+					minDisplay = tmp.results.size();
 				}
 				if (minDisplay > sentenceLabels.length) {
 					for (int i=minDisplay;i<sentenceLabels.length;i++) {
@@ -134,7 +131,7 @@ public class Interface {
 					}
 				}
 				for (int i=0;i<minDisplay;i++) {
-					String s = (i+1) + ". " + tmp.results[i];
+					String s = (i+1) + ". " + tmp.results.get(i);
 					String html1 = "<html><body style='width: ";
 					String html2 = "px'>\n";
 //					System.out.println(s);

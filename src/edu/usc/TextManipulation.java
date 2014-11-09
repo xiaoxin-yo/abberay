@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class TextManipulation {
 	private static String text= "Sulfate (SO42-) is the second-most abundant anion after chloride in the modern ocean. It serves as an easily accessible energy source for sulfate-reducing prokaryotes (SRPs), which are commonly found in organic-rich sediments and play an important role in the decomposition of organic matter. Were these microbes major players in ecosystems during the Archean (before 2.5 billion years ago), when molecular oxygen was virtually absent from both the atmosphere and oceans? Whether this was the case depends on how much sulfate there was in the Archean ocean. Three articles in this issue (1-3) use precise measurements of stable sulfur isotope ratios to investigate how much sulfate there was in the Archean ocean and where that sulfate originated. Scientists use the ratio between two stable sulfur isotopes, 34S and 32S, to trace SRP activity in ancient sedimentary rocks. In sediments, the microbes preferentially reduce 32SO42- compared to 34SO42-, producing iron sulfide minerals that are depleted in 34S (a process called mass-dependent isotopic fractionation). 34S depletion recorded in pyrite (FeS2) minerals is thus a good indicator of SRP activity. Large 34S depletions are seen in the geological records starting about 2.3 billion years ago, but not before (4). One possible interpretation of these data is that there was little SRP activity in the Archean. Another possibility is that these microbes appeared much earlier, but that the Archean sulfate levels were too low for them to selectively reduce 32SO42-; low sulfate levels are known to reduce the degree of isotopic fractionation (5).";
 	private String abbv; 
-	String[] results;
+	ArrayList<String> results;
 
 	private ArrayList<Integer> indexes;
 	
@@ -23,10 +23,11 @@ public class TextManipulation {
 	public void setAbbv(String abbv) {
 		this.abbv = abbv;
 		// moved to here because we now have abbv set
-		if (countOccur() < 3)
-			this.results = new String[countOccur()];	
-		else	
-			this.results = new String[3];
+		this.results = new ArrayList<String>();
+//		if (countOccur() < 3)
+//			this.results = new ArrayList<String>(countOccur());	
+//		else	
+//			this.results = new ArrayList<String>(3);
 		this.indexes = new ArrayList<Integer>();
 	}
 
@@ -139,24 +140,25 @@ public class TextManipulation {
 	}
 	
 	public void returnResult(){
-		int count = 0;	
+	//	int count = 0;	
 		int start, end;
-		for (int i=0; count < results.length; i++){
-			if (count==0){
+		for (int i=0; i < countOccur(); i++){
+			if (i==0){
 				start = findSentenceStart(indexes.get(i))+1;
 				end = findSentenceEnd(indexes.get(i))+1;
-				results[count] = text.substring(start, end);
-				count++;
+				results.add(text.substring(start, end));
+				//count++;
 			}
 			// adding 1 to findSentenceStart parameter to avoid -1 index
 			// adding 2 to substring parameter to avoid extra period and space
 			else{
 				start = findSentenceStart(indexes.get(i))+1;
 				end = findSentenceEnd(indexes.get(i)+1)+1;
-				if (!text.substring(start, end).equals(results[count-1])){
-					results[count] = text.substring(start, end).trim();
-					count++;
+				if (!text.substring(start, end).equals(results.get(i-1))){
+					results.add(text.substring(start, end).trim());
+					//count++;
 				}
+				//else
 				
 			}
 			 
