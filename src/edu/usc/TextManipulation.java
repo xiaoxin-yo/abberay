@@ -54,7 +54,7 @@ public class TextManipulation {
 			source = source.substring(source.indexOf(abbv) + abbv.length());
 			count++;
 		}
-		System.out.println(count);
+//		System.out.println(count);
 		return count;
 
 	}
@@ -78,7 +78,7 @@ public class TextManipulation {
 			end = qLoc;
 		}
 		while(true) {
-			if (Character.isUpperCase(text.substring(end+2, end+3).charAt(0)))
+			if (Character.isUpperCase(text.substring(end+2, end+3).charAt(0)) || Character.isDigit(text.substring(end+2, end+3).charAt(0)))
 				return end;
 			else{
 				if (end == -1) {
@@ -125,7 +125,7 @@ public class TextManipulation {
 				return beg;
 			}
 			
-			else if (Character.isUpperCase(text.substring(beg+2, beg+3).charAt(0))){
+			else if (Character.isUpperCase(text.substring(beg+2, beg+3).charAt(0)) || Character.isDigit(text.substring(beg+2, beg+3).charAt(0))){
 				return beg;
 			}
 			else if (beg != 0){
@@ -144,11 +144,11 @@ public class TextManipulation {
 		for (int i=0; count < results.length; i++){
 			if (count==0){
 				start = findSentenceStart(indexes.get(i))+1;
-				end = findSentenceEnd(indexes.get(i))+2;
+				end = findSentenceEnd(indexes.get(i))+1;
 				results[count] = text.substring(start, end);
 				count++;
 			}
-			//adding 1 to findSentenceStart parameter to avoid -1 index
+			// adding 1 to findSentenceStart parameter to avoid -1 index
 			// adding 2 to substring parameter to avoid extra period and space
 			else{
 				start = findSentenceStart(indexes.get(i))+1;
@@ -157,6 +157,7 @@ public class TextManipulation {
 					results[count] = text.substring(start, end).trim();
 					count++;
 				}
+				
 			}
 			 
 		}

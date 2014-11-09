@@ -1,6 +1,7 @@
 package edu.usc;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,6 +26,7 @@ public class Interface {
 	private TextManipulation tmp;
 	private JLabel [] sentenceLabels;
 	private JPanel sentencePanel;
+	private Font font = new Font("Segoe UI", Font.PLAIN, 20);;
 	
 	public static void main(String [] args) {
 		try {
@@ -63,11 +65,14 @@ public class Interface {
 	private void setTextArea(JFrame frame) {
 		// text area
 		JPanel textPanel = new JPanel();
+		textPanel.setLayout(new BorderLayout());
 		textArea = new JTextArea(paper);
-		textArea.setSize(windowWidth-50, windowHeight);
+//		textArea.setSize(windowWidth-50, windowHeight);
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
+		
+		textArea.setFont(font);
 		// textArea -> JScrollPane -> textPanel
 		textPanel.add(new JScrollPane(textArea));
 		// textPanel -> frame
@@ -80,15 +85,17 @@ public class Interface {
 		this.window.setLayout(new BorderLayout());
 
 		// to edit when intelligent definition is implemented
-		JTextArea definitionLabel = new JTextArea("Intelligent definition");
-		definitionLabel.setEditable(false);
+		JTextArea definitionArea = new JTextArea("Intelligent definition");
+		definitionArea.setFont(font);
+		definitionArea.setEditable(false);
 		//
 		sentenceLabels = new JLabel[3];
 		tmp = new TextManipulation(paper);
 		for (int i=0;i<3;i++) {
 			sentenceLabels[i] = new JLabel();
+			sentenceLabels[i].setFont(font);
 		}
-		this.window.add(definitionLabel,BorderLayout.NORTH);
+		this.window.add(definitionArea,BorderLayout.NORTH);
 		sentencePanel = new JPanel();
 		sentencePanel.setLayout(new BoxLayout(sentencePanel, BoxLayout.Y_AXIS));
 		for (int i=0;i<3;i++) {
@@ -105,7 +112,7 @@ public class Interface {
 		}
 		public void mouseClicked(MouseEvent e){
 			if(e.getClickCount() == 2){
-				System.out.println(textArea.getSelectedText());
+				
 				window.setLocation(frame.getX()+e.getX()+70, frame.getY()+e.getY()+60);
 				tmp.setAbbv(textArea.getSelectedText());
 				tmp.prepare(tmp);
@@ -115,6 +122,16 @@ public class Interface {
 				}
 				else {
 					minDisplay = 3;
+				}
+				if (minDisplay > sentenceLabels.length) {
+					for (int i=minDisplay;i<sentenceLabels.length;i++) {
+						sentencePanel.remove(sentenceLabels[i]);
+					}
+				}
+				if (minDisplay > sentenceLabels.length) {
+					for (int i=sentenceLabels.length;i<minDisplay;i++) {
+						sentencePanel.add(sentenceLabels[i]);
+					}
 				}
 				for (int i=0;i<minDisplay;i++) {
 					String s = (i+1) + ". " + tmp.results[i];
